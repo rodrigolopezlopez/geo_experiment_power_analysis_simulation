@@ -18,16 +18,26 @@ In **geo experiments**, treatment is randomized at the geography level (e.g., re
 
 | Section | Description |
 |--------|-------------|
-| **1. Setup and Notation** | Geos, periods, treatment indicator \(D_g\), outcome \(Y_{gt}\), post indicator. |
-| **2. The DiD Estimand** | The 2×2 formula and the regression formulation \(Y_{gt} = \alpha + \beta_1 D_g + \beta_2 \text{Post}_t + \tau (D_g \times \text{Post}_t) + \varepsilon_{gt}\). |
+| **1. Setup and Notation** | Geos, periods, treatment indicator $D_g$, outcome $Y_{gt}$, post indicator. |
+| **2. The DiD Estimand** | The 2×2 formula and the regression formulation. |
 | **3. Synthetic Data Generation** | Simulates geos over pre/post periods with a known treatment effect; parallel trends hold by construction. |
 | **4. Checking Parallel Trends** | Visual plot (outcome by period for treatment vs control) and a formal regression test (pre-period only: high p-value on period×treated supports parallel trends). |
 | **5. Estimating the Effect: 2×2 Table** | Computes the four cell means and the DiD estimate by hand. |
-| **6. Estimating the Effect: Regression** | Fits `y ~ treated * post`; the coefficient on `treated:post` is \(\hat{\tau}\). |
+| **6. Estimating the Effect: Regression** | Fits `y ~ treated * post`; the coefficient on `treated:post` is $\hat{\tau}$. |
 | **7. Equivalence** | Shows that the 2×2 DiD and the regression coefficient are numerically identical. |
 | **8. Inference: Cluster-Robust SEs** | Uses cluster-robust standard errors by geo (Bertrand et al., 2004); reports 95% CI. |
 | **9. Power Analysis** | Simulation-based power: repeatedly generates data, runs the DiD test with clustered SEs, and reports empirical power and Type I error. |
 | **10. Assumptions and Best Practices** | Randomization, parallel trends, no spillover, clustering, aggregation; references. |
+
+**2×2 DiD formula:**
+
+$$\tau_{\text{DiD}} = (\bar{Y}^{\text{treat}}_{\text{post}} - \bar{Y}^{\text{treat}}_{\text{pre}}) - (\bar{Y}^{\text{control}}_{\text{post}} - \bar{Y}^{\text{control}}_{\text{pre}})$$
+
+**Regression formulation:**
+
+$$Y_{gt} = \alpha + \beta_1 D_g + \beta_2 \text{Post}_t + \tau (D_g \times \text{Post}_t) + \varepsilon_{gt}$$
+
+The coefficient $\tau$ on the interaction $D_g \times \text{Post}_t$ is the average treatment effect on the treated (ATT).
 
 ---
 
